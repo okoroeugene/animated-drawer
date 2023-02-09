@@ -3,6 +3,11 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { commonStyles } from "../theme/commonStyles";
 import Profile from "../screens/Contact/Contact";
 import StackNavigator from "./StackNavigator";
+import {
+  APP_NAVIGATOR,
+  TAB_STACK_CONTACT,
+  TAB_STACK_HOME,
+} from "./navigation.constants";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,9 +24,9 @@ export function TabBavigation() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "AppNavigator") {
+          if (route.name === APP_NAVIGATOR) {
             iconName = focused ? "home" : "home-outline";
-          } else if (route.name === "Profile") {
+          } else if (route.name === TAB_STACK_CONTACT) {
             iconName = focused ? "person" : "person-outline";
           }
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -29,11 +34,11 @@ export function TabBavigation() {
       })}
     >
       <Tab.Screen
-        name="AppNavigator"
-        options={{ tabBarLabel: "Home" }}
+        name={APP_NAVIGATOR}
+        options={{ tabBarLabel: TAB_STACK_HOME }}
         component={StackNavigator}
       />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name={TAB_STACK_CONTACT} component={Profile} />
     </Tab.Navigator>
   );
 }
