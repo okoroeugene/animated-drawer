@@ -1,5 +1,7 @@
 # Drawer Navigation Animation
 
+![Simulator Screen Recording - iPhone 14 Plus - 2023-02-09 at 12 09 10](https://user-images.githubusercontent.com/21360216/217796656-27b684d5-1692-4c4a-9bd7-f27cc97c1958.gif)
+
 This project is based on Expo https://docs.expo.io/versions/v47.0.0 and was written with Typescript.
 
 ### Project Description
