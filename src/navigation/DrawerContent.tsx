@@ -1,10 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
-import {
-  DrawerContentScrollView,
-  DrawerItem,
-  useDrawerProgress,
-} from "@react-navigation/drawer";
+import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import Animated from "react-native-reanimated";
 
 import { SafeAreaView } from "react-native-safe-area-context";

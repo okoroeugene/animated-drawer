@@ -1,31 +1,44 @@
-import { useDrawerProgress, useDrawerStatus } from "@react-navigation/drawer";
+import { useDrawerProgress } from "@react-navigation/drawer";
 import React, { memo, useCallback } from "react";
 import Animated, {
   interpolate,
   useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
 } from "react-native-reanimated";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
 import { commonStyles } from "../theme/commonStyles";
+import { useDispatch } from "react-redux";
+import { persistDerivedValue } from "../redux/actions/navigation";
 
-type DrawerViewOptions = {
+interface DrawerViewOptions {
   children: any;
   navigation?: any;
-};
+}
 
 function DrawerView({ children, navigation }: DrawerViewOptions) {
+  const dispatch = useDispatch();
   const drawerProgress: any = useDrawerProgress();
-  const viewStyles: any = useAnimatedStyle((): any => {
-    const scale = interpolate(drawerProgress.value, [0, 1], [1, 0.8]);
-    const borderRadius = interpolate(drawerProgress.value, [0, 1], [0, 40]);
-    const rotate = interpolate(drawerProgress.value, [0, 1], ["0deg", "-8deg"]);
-    const translateX = interpolate(drawerProgress.value, [0, 1], [0, 70]);
-    const translateY = interpolate(drawerProgress.value, [0, 1], [0, 20]);
+  const animatedValue = useSharedValue(0);
+  const derivedValue = useDerivedValue(() => {
+    animatedValue.value = drawerProgress.value;
+    return drawerProgress.value;
+  });
+
+  const viewStyles: any = useAnimatedStyle(() => {
+    const scale = interpolate(derivedValue.value, [0, 1], [1, 0.8]);
+    const borderRadius = interpolate(derivedValue.value, [0, 1], [1, 40]);
+    const rotate = interpolate(derivedValue.value, [0, 1], [0, -8]);
+
     return {
-      transform: [{ scale }, { rotate }, { translateX }, { translateY }],
       borderRadius,
+      transform: [{ scale }, { rotateZ: `${rotate}deg` }],
     };
   });
+
+  /**dispatch shared value to redux so we can use animation in other components */
+  dispatch(persistDerivedValue({ animatedValue: animatedValue }));
 
   const handleToggle = useCallback(() => navigation.toggleDrawer(), []);
 

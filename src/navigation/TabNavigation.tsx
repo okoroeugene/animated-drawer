@@ -11,7 +11,7 @@ import {
 
 const Tab = createBottomTabNavigator();
 
-export function TabBavigation() {
+function TabNavigation({ navigation }) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -42,3 +42,5 @@ export function TabBavigation() {
     </Tab.Navigator>
   );
 }
+
+export default TabNavigation;
