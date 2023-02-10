@@ -1,6 +1,6 @@
 # Drawer Navigation Animation
 
-![Simulator Screen Recording - iPhone 14 Plus - 2023-02-09 at 12 09 10](https://user-images.githubusercontent.com/21360216/217796656-27b684d5-1692-4c4a-9bd7-f27cc97c1958.gif)
+<img width="300" src="https://im2.ezgif.com/tmp/ezgif-2-b676de5902.gif" />
 
 This project is based on Expo https://docs.expo.io/versions/v47.0.0 and was written with Typescript.
 
@@ -21,6 +21,7 @@ The navigation was setup using react-navigation, where the parent navigation is 
 - The use of hooks useCallback to call the `handleToggle` function to toggle the drawer, this prop (useCallback) prevents rerenders when the state changes.
 - Also used `memo` (for memoization) in the DrawerView component to prevent unnecessary rerenders when `old state === new state`
 
-## Setbacks
+## Updates
 
-- Wasn't able to get the rotate transform correctly (still WIP)
+Introduced `useSharedValue`, a reanimated hook to create a reference to the progress value that can be shared with the rest of the worklets.
+Also used `useDerivedValue`, a reanimated hook use to mutate the progress at every update and have access to the values. And then setup redux so I can save the shared value and have access to it from other components.
